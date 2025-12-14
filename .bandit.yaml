@@ -1,0 +1,2 @@
+skips: [B101] # Skip assert_used test
+exclude_dirs: [venv, .git]

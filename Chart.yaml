@@ -1,0 +1,17 @@
+apiVersion: v2
+name: secret-operator
+description: A Kubernetes operator that manages GitHub app authentication secrets
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+keywords:
+  - kubernetes
+  - operator
+  - secrets
+  - github
+  - authentication
+maintainers:
+  - name: Oliver Goetz
+home: https://github.com/olivergoetz/python-kubernetes-operator
+sources:
+  - https://github.com/olivergoetz/python-kubernetes-operator

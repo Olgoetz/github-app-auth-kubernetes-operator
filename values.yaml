@@ -1,0 +1,99 @@
+# Default values for secret-operator chart.
+# This is a YAML-formatted file.
+
+# -- Number of replicas for the operator deployment
+replicaCount: 1
+
+# Image configuration
+image:
+  # -- Container image repository
+  repository: secret-operator
+  # -- Image pull policy (Always, IfNotPresent, Never)
+  pullPolicy: IfNotPresent
+  # -- Overrides the image tag (defaults to the chart appVersion)
+  tag: "latest"
+
+# -- List of image pull secrets for private registries
+imagePullSecrets: []
+
+# -- Override the name of the chart
+nameOverride: ""
+
+# -- Override the full name of the resources
+fullnameOverride: ""
+
+# Operator configuration
+operator:
+  # -- Namespaces to watch for secrets with the annotation
+  # Can be a comma-separated list: "default,production,staging"
+  # Use "*" for cluster-wide mode (requires ClusterRole permissions)
+  # Leave empty to watch only the operator's namespace
+  watchNamespaces: "default"
+
+  # -- Enable verbose logging (adds --verbose flag to kopf run)
+  # This provides detailed operator framework logs
+  verbose: false
+
+  # -- Token refresh buffer in seconds (refresh this many seconds before expiry)
+  # Default: 300 seconds (5 minutes)
+  refreshBufferSeconds: 300
+
+  # -- Minimum sleep time between checks in seconds
+  # Prevents tight loops in the daemon
+  minSleepSeconds: 10
+
+  # -- Default token validity in minutes (used in get_access_token function)
+  # This is a placeholder - in production, this would come from your auth provider
+  defaultTokenMinutes: 3
+
+# Service Account configuration
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# RBAC configuration
+rbac:
+  # -- Create Role and RoleBinding resources
+  create: true
+  # -- Additional namespaces where Role and RoleBinding should be created
+  # The operator's namespace is automatically included
+  # Example: ["production", "staging"]
+  additionalNamespaces: []
+
+# Pod configuration
+podAnnotations: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+
+# Resource limits and requests
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# Node selector
+nodeSelector: {}
+
+# Tolerations
+tolerations: []
+
+# Affinity rules
+affinity: {}
