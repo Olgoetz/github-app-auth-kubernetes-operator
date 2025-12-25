@@ -279,8 +279,8 @@ async def token_refresh_daemon(spec, meta, namespace, body, stopped, logger, **k
     logger.info(f"Starting token refresh daemon for secret {namespace}/{name}")
 
     # Refresh buffer: refresh token this many seconds before expiry
-    REFRESH_BUFFER_SECONDS = os.getenv("REFRESH_BUFFER_SECONDS", 300)
-    MIN_SLEEP_SECONDS = os.getenv("minSleepSeconds", 10)  # Minimum sleep time to avoid tight loops
+    REFRESH_BUFFER_SECONDS = int(os.getenv("REFRESH_BUFFER_SECONDS", 300))
+    MIN_SLEEP_SECONDS = int(os.getenv("minSleepSeconds", 10))  # Minimum sleep time to avoid tight loops
 
     while not stopped:
         try:
