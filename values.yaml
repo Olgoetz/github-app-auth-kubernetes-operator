@@ -7,11 +7,11 @@ replicaCount: 1
 # Image configuration
 image:
   # -- Container image repository
-  repository: secret-operator
+  repository: image-registry.openshift-image-registry.svc:5000/mccc-prod-ago-fr/gh-app-auth-operator
   # -- Image pull policy (Always, IfNotPresent, Never)
   pullPolicy: IfNotPresent
   # -- Overrides the image tag (defaults to the chart appVersion)
-  tag: "latest"
+  tag: "1.0.0"
 
 # -- List of image pull secrets for private registries
 imagePullSecrets: []
@@ -28,11 +28,11 @@ operator:
   # Can be a comma-separated list: "default,production,staging"
   # Use "*" for cluster-wide mode (requires ClusterRole permissions)
   # Leave empty to watch only the operator's namespace
-  watchNamespaces: "default"
+  watchNamespaces: "mccc-prod-ago-fr"
 
   # -- Enable verbose logging (adds --verbose flag to kopf run)
   # This provides detailed operator framework logs
-  verbose: false
+  verbose: true
 
   # -- Token refresh buffer in seconds (refresh this many seconds before expiry)
   # Default: 300 seconds (5 minutes)
@@ -68,10 +68,6 @@ rbac:
 # Pod configuration
 podAnnotations: {}
 
-podSecurityContext:
-  runAsNonRoot: true
-  runAsUser: 1000
-  fsGroup: 1000
 
 securityContext:
   allowPrivilegeEscalation: false
@@ -87,7 +83,7 @@ resources:
     memory: 256Mi
   requests:
     cpu: 100m
-    memory: 128Mi
+    memory: 256Mi
 
 # Node selector
 nodeSelector: {}
