@@ -9,7 +9,7 @@ image:
   # -- Container image repository
   repository: image-registry.openshift-image-registry.svc:5000/mccc-prod-ago-fr/gh-app-auth-operator
   # -- Image pull policy (Always, IfNotPresent, Never)
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # -- Overrides the image tag (defaults to the chart appVersion)
   tag: "1.0.0"
 
@@ -27,8 +27,7 @@ operator:
   # -- Namespaces to watch for secrets with the annotation
   # Can be a comma-separated list: "default,production,staging"
   # Use "*" for cluster-wide mode (requires ClusterRole permissions)
-  # Leave empty to watch only the operator's namespace
-  watchNamespaces: "mccc-prod-ago-fr"
+  watchNamespaces: "mccc-prod-ago-fr,tfe-agents-prod-ago-fr"
 
   # -- Enable verbose logging (adds --verbose flag to kopf run)
   # This provides detailed operator framework logs
@@ -63,7 +62,8 @@ rbac:
   # -- Additional namespaces where Role and RoleBinding should be created
   # The operator's namespace is automatically included
   # Example: ["production", "staging"]
-  additionalNamespaces: []
+  additionalNamespaces:
+    - "tfe-agents-prod-ago-fr"
 
 # Pod configuration
 podAnnotations: {}
