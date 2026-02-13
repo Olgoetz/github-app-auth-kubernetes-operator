@@ -27,7 +27,7 @@ operator:
   # -- Namespaces to watch for secrets with the annotation
   # Can be a comma-separated list: "default,production,staging"
   # Use "*" for cluster-wide mode (requires ClusterRole permissions)
-  watchNamespaces: "mccc-prod-ago-fr,tfe-core-prod-ago-fr"
+  watchNamespaces: "mccc-prod-ago-fr,tfe-core-prod-ago-fr, hc-vault-nonprod-ago-fr, hc-vault-prod-ago-fr"
 
   # -- Enable verbose logging (adds --verbose flag to kopf run)
   # This provides detailed operator framework logs
@@ -64,6 +64,8 @@ rbac:
   # Example: ["production", "staging"]
   additionalNamespaces:
     - "tfe-core-prod-ago-fr"
+    - "hc-vault-nonprod-ago-fr"
+    - "hc-vault-prod-ago-fr"
 
 # Pod configuration
 podAnnotations: {}
